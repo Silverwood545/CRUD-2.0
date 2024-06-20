@@ -1,0 +1,79 @@
+{% extends "base.html"%} {% block title %}Add Members{% endblock %}
+
+{% block content%}
+<form method="post">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: none;
+                color: white;
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    
+            .button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+      
+    </head>
+    <h1 align="center"> Add Members To Project</h1>
+   
+    
+    <br />
+    <a href ="/members/create" class="btn btn-primary" method="GET">Add Member</a>
+    <br/><br/><br/>
+    
+   
+        <h2 align="center">Projects And Members</h2>
+        <ul class="list-group list-group-flush" id="Member">
+            <table class="table">
+                <thead class="thead-dark">
+                    <th> ID </th>
+                    <th> Project Name </th>
+                    <th> Member </th>
+                    <th> Role </th>
+                    <th> Start Date </th>
+                    <th> End Date </th>
+                    <th> Actions </th>
+                </thead>
+                <tbody>
+                
+                        <tr>
+                                {% for member in member %}
+                                <td> {{member.id}} </td>
+                                <td> {{member.projectname}} </td>
+                                <td> {{member.membername}} </td>
+                                <td> {{member.role}} </td>
+                                <td> {{member.startdate}} </td>
+                                <td> {{member.enddate}} </td>
+                                
+                                <td>
+                                    <div class="btn-group">
+                                        <form method="POST" action="/members/delete/{{ member.id }}">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                        <form method="GET" action="/members/update/{{ member.id }}">
+                                            <button type="submit">Update</button>
+                                        </form>
+                                    
+                                    </div>
+                                </td>
+                        </tr>
+                           
+                        {% endfor %}
+                </tbody>
+            </table>
+      
+
+</form>
+
+{% endblock %}
